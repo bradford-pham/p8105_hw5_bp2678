@@ -10,6 +10,7 @@ library(dplyr)
 library(ggplot2)
 ```
 
+#Question 2 
 
 #Loaded the files and data frame in 
 ```{r message=FALSE, warning=FALSE}
@@ -47,7 +48,7 @@ tidy_files_df <- files_df %>%
 ggplot(tidy_files_df, aes(x = week, y = value, color = subject_id)) +
   geom_point() +
   geom_line() +
-  labs(title = "Spaghetti Plot of Observations Over Time",
+  labs(title = "Difference Between Control and Experiment Group Over 8 Weeks",
        x = "Week",
        y = "Value") +
   theme_bw() +
@@ -56,8 +57,7 @@ ggplot(tidy_files_df, aes(x = week, y = value, color = subject_id)) +
 
 In the experiment group it shows that there is a general trend of the value increasing as the weeks go by. However, in the control group it seems to remain the same as the weeks go by and that there isn't much change. 
 
-
-
+#Question 3 
 
 
 
