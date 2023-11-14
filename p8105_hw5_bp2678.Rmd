@@ -12,7 +12,7 @@ library(ggplot2)
 
 
 #Loaded the files and data frame in 
-```{r}
+```{r message=FALSE, warning=FALSE}
 files_df <- 
   tibble(
     files = list.files('data'),
@@ -25,22 +25,36 @@ files_df <-
 #Tidy up the data
 
 ```{r}
-tidy_files_df <- files_df |>
+tidy_files_df <- files_df %>%
   mutate(files = str_replace(files, ".csv", ""),
          files = str_replace(files, "con", "control"),
-         files = str_replace(files, "exp", "experiment")) |>
-rename(arm_subject_id = files) |>
+         files = str_replace(files, "exp", "experiment")) %>%
+  rename(arm_subject_id = files) %>%
+  separate(arm_subject_id, into = c("arm", "subject_id"), sep = "_") %>%
   pivot_longer(cols = starts_with("week"),
                names_to = "week",
-               values_to = "value") |>
-select(-path)
+               values_to = "value") %>%
+  select(-path) %>%
+  mutate(week = as.numeric(gsub("week_", "", week)))
+
+  
+
 
 ```
 
+```{r}
 
+ggplot(tidy_files_df, aes(x = week, y = value, color = subject_id)) +
+  geom_point() +
+  geom_line() +
+  labs(title = "Spaghetti Plot of Observations Over Time",
+       x = "Week",
+       y = "Value") +
+  theme_bw() +
+  facet_grid(. ~ arm)
+```
 
-
-
+In the experiment group it shows that there is a general trend of the value increasing as the weeks go by. However, in the control group it seems to remain the same as the weeks go by and that there isn't much change. 
 
 
 
