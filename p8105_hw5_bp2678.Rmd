@@ -10,3 +10,42 @@ library(dplyr)
 library(ggplot2)
 ```
 
+
+#Loaded the files and data frame in 
+```{r}
+files_df <- 
+  tibble(
+    files = list.files('data'),
+    path = str_c("data/", files, sep = "/")
+  ) |>
+  mutate(data = map(path, read_csv)) |>
+  unnest(cols = c(data))
+```
+
+#Tidy up the data
+
+```{r}
+tidy_files_df <- files_df |>
+  mutate(files = str_replace(files, ".csv", ""),
+         files = str_replace(files, "con", "control"),
+         files = str_replace(files, "exp", "experiment")) |>
+rename(arm_subject_id = files) |>
+  pivot_longer(cols = starts_with("week"),
+               names_to = "week",
+               values_to = "value") |>
+select(-path)
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
