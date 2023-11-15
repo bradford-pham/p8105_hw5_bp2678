@@ -62,8 +62,6 @@ ggplot(tidy_files_df, aes(x = week, y = value, color = subject_id)) +
 In the experiment group it shows that there is a general trend of the value increasing as the weeks go by. However, in the control group it seems to remain the same as the weeks go by and that there isn't much change. 
 
 #Question 3 
-
-
 ```{r}
 
 compare_mu_values_map <- function(mu_values = c(0, 1, 2, 3, 4, 5, 6), n = 30, sigma = 5, num_datasets = 5000, alpha = 0.05) {
@@ -99,6 +97,7 @@ ggplot(powers_info, aes(x = mu, y = power)) +
        y = "Proportion of Rejected Null Hypothesis") +
   theme_bw()
 ```
+
 Each time the graph is run, it changes everytime. This indicates that there is a non linear relationship between effect size and power.
 
 
@@ -118,6 +117,7 @@ ggplot(average_estimate_df, aes(x = mu, y = average_estimate)) +
 
 
 ```
+
 There is a very strong linear relationship between true value of and the average estimate of mu value.The reason for is because as the simulation is run multiple times then the average estimate gets closer to the true value of mu.
 
 #Plot3
@@ -138,6 +138,7 @@ ggplot() +
        y = "Average Estimate of μ^") +
   theme_bw()
 ```
+
 The relationship between mu when only in samples for which the null was rejected and the true mu value is a strong linear relationship, however it is not as linear as the average estimate of mu and true mu value (graph 2). The average estimate of mu when the null is rejected does represent the true mu value. This could be due to the sample variations. 
 
 
